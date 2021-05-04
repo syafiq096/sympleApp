@@ -1,6 +1,7 @@
 import express from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import { schema } from './Schema';
+import {Users} from './Entities/User'
 import cors from 'cors';
 import { createConnection } from 'typeorm';
 
@@ -13,7 +14,7 @@ const main = async () => {
         password: "0000",
         logging: true,
         synchronize: false,
-        entities: [],
+        entities: [Users],
     });
 
     const app = express()
