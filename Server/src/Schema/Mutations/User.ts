@@ -18,6 +18,29 @@ export const CREATE_USER = {
     }
 }
 
+export const UPDATE_PASSWORD = {
+    type: UserType,
+    args: {
+        username: {type: GraphQLString},
+        oldPassword: {type: GraphQLString},
+        newPassword: {type: GraphQLString},
+    },
+    async resolve(parent: any, args: any) {
+        const {username, oldPassword, newPassword} = args;
+        const user = await Users.findOne({username: username});
+        const userPassword = user?.password;
+
+        if (oldPassword === userPassword) {
+            await Users.update(
+                {username: username}, 
+                {password: newPassword}
+            );
+        } else {
+            throw new Error("PASSWORD NOT MATCH")
+        }
+    }
+}
+
 export const DELETE_USER = {
     type: UserType,
     args: {
