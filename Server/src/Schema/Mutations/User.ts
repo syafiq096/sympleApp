@@ -43,7 +43,6 @@ export const UPDATE_PASSWORD = {
 
             return {successful: true, message: "SUCCESSFULLY UPDATE USER"};
 
-            
         } else {
             throw new Error("PASSWORD NOT MATCH")
         }
