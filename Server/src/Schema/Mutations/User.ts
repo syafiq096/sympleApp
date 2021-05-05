@@ -1,6 +1,7 @@
 import { GraphQLID, GraphQLString } from "graphql";
 import { UserType } from "../TypeDefs/User";
-import {Users} from '../../Entities/User'
+import { MessageType } from "../TypeDefs/Message";
+import {Users} from '../../Entities/User';
 
 
 
@@ -19,7 +20,7 @@ export const CREATE_USER = {
 }
 
 export const UPDATE_PASSWORD = {
-    type: UserType,
+    type: MessageType,
     args: {
         username: {type: GraphQLString},
         oldPassword: {type: GraphQLString},
@@ -30,11 +31,19 @@ export const UPDATE_PASSWORD = {
         const user = await Users.findOne({username: username});
         const userPassword = user?.password;
 
+        if (!user) {
+            throw new Error("USERNAME NOT EXIST")
+        }
+
         if (oldPassword === userPassword) {
             await Users.update(
                 {username: username}, 
                 {password: newPassword}
             );
+
+            return {successful: true, message: "SUCCESSFULLY UPDATE USER"};
+
+            
         } else {
             throw new Error("PASSWORD NOT MATCH")
         }
@@ -42,12 +51,14 @@ export const UPDATE_PASSWORD = {
 }
 
 export const DELETE_USER = {
-    type: UserType,
+    type: MessageType,
     args: {
         id: {type: GraphQLID},
     },
     async resolve(parent: any, args: any) {
         const { id } = args;
         await Users.delete(id);
+
+        return {successful: true, message: "SUCCESSFULLY DELETE USER"};
     }
 }
