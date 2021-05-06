@@ -35,7 +35,7 @@ export const UPDATE_PASSWORD = {
             throw new Error("USERNAME NOT EXIST")
         }
 
-        if (oldPassword === userPassword) {
+        else if (oldPassword === userPassword) {
             await Users.update(
                 {username: username}, 
                 {password: newPassword}
