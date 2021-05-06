@@ -2,6 +2,7 @@ import React from 'react';
 import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 import ReactDOM from 'react-dom';
 import App from './App';
+import "./index.css";
 import reportWebVitals from './reportWebVitals';
 
 const client = new ApolloClient({
