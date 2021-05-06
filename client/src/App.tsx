@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useQuery } from "@apollo/client";
+import React, { useEffect, useState } from "react";
+import { useLazyQuery } from "@apollo/client";
 import { GET_ALL_USERS } from "./GraphQL/Queries";
 
 import List from "./View/TableList/Index";
@@ -9,14 +9,21 @@ import UserForm from "./View/CreateUser";
 import { Box, Container, Divider } from "@material-ui/core";
 
 function App() {
-  const { data, refetch, loading } = useQuery(GET_ALL_USERS);
+  const [search, setSearch] = useState("")
+  const [getUser, { data, loading }] = useLazyQuery(GET_ALL_USERS);
+
+  console.log('search :>> ', search);
+
+  useEffect(() => {
+    getUser({variables: {name: ""}})
+  }, [getUser])
 
   return (
     <div>
       <AppBar />
       <Container maxWidth="xl">
         <Box mt={2} />
-        <UserForm refetch={refetch} />
+        <UserForm refetch={getUser} />
         {/* <div className="createUser">
         <input type="text" placeholder="Name" onChange={e => setUserInfo({...userInfo, name: e.target.value})} />
         <input type="text" placeholder="User Name" onChange={e => setUserInfo({...userInfo, userName: e.target.value})} />
@@ -27,7 +34,7 @@ function App() {
         <Divider variant="middle" />
         <Box mt={3} />
 
-        <List data={data?.getAllUsers} refetch={refetch} loading={loading} />
+        <List data={data?.getAllUsers} refetch={getUser} loading={loading} setSearch={setSearch} search={search} />
         <Box mt={2} />
         <UpdateUser />
       </Container>
