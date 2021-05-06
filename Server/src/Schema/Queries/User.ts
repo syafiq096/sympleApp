@@ -6,8 +6,15 @@ import { Like } from 'typeorm';
 
 export const GET_ALL_USERS = {
     type: new GraphQLList(UserType),
-    resolve() {
-        return Users.find();
+    args: {
+        name: {type: GraphQLString},
+    },
+    // resolve() {
+    //     return Users.find();
+    // }
+    resolve(parent: any, args: any) {
+        console.log(`args`, args)
+        return Users.find({name: Like(`%${args.name}%`)});
     }
 }
 
