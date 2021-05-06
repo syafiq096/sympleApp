@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import {useMutation} from '@apollo/client';
-import {CREATE_USER} from './GraphQL/Mutation'
+import {useMutation, useQuery} from '@apollo/client';
+import {CREATE_USER} from './GraphQL/Mutation';
+import { GET_ALL_USERS } from "./GraphQL/Queries";
 import './App.css';
 
 import List from './View/TableList/Index';
 import UpdateUser from './View/UpdatePassword';
 
 function App() {
-
-  const [createUser, {error}] = useMutation(CREATE_USER);
+  const { data, refetch } = useQuery(GET_ALL_USERS);
+  const [createUser, createUserRes] = useMutation(CREATE_USER);
   const [userInfo, setUserInfo] = useState({
     name: "",
     userName: "",
@@ -21,11 +22,9 @@ function App() {
         name: userInfo.name, 
         username: userInfo.userName, 
         password: userInfo.password}
-      })
+      }).then(() => refetch()).catch(err => console.log(`err`, err))
   }
 
-
-  
   return (
     
       <div className="createUser">
@@ -33,7 +32,7 @@ function App() {
         <input type="text" placeholder="User Name" onChange={e => setUserInfo({...userInfo, userName: e.target.value})} />
         <input type="text" placeholder="Password" onChange={e => setUserInfo({...userInfo, password: e.target.value})} />
         <button onClick={handleSubmit}>Create User</button>
-        <List />
+        <List data={data?.getAllUsers} refetch={refetch}/>
         <UpdateUser />
       </div>
   );
