@@ -45,7 +45,6 @@ function Index() {
         }}
       />
       <button onClick={updateUser}>Update User</button>
-      {}
     </div>
   );
 }

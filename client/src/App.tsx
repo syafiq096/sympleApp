@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import {useMutation, useQuery} from '@apollo/client';
 import {CREATE_USER} from './GraphQL/Mutation';
 import { GET_ALL_USERS } from "./GraphQL/Queries";
-import './App.css';
 
 import List from './View/TableList/Index';
 import UpdateUser from './View/UpdatePassword';
+import AppBar from './Components/Appbar';
 
 function App() {
   const { data, refetch } = useQuery(GET_ALL_USERS);
@@ -26,7 +26,8 @@ function App() {
   }
 
   return (
-    
+      <div>
+        <AppBar />
       <div className="createUser">
         <input type="text" placeholder="Name" onChange={e => setUserInfo({...userInfo, name: e.target.value})} />
         <input type="text" placeholder="User Name" onChange={e => setUserInfo({...userInfo, userName: e.target.value})} />
@@ -34,6 +35,7 @@ function App() {
         <button onClick={handleSubmit}>Create User</button>
         <List data={data?.getAllUsers} refetch={refetch}/>
         <UpdateUser />
+      </div>
       </div>
   );
 }
