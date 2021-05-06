@@ -8,10 +8,11 @@ import MenuIcon from '@material-ui/icons/Menu'
 
 interface compData {
     data?: any;
-    refetch: () => {}
+    refetch: () => {};
+    loading: any
 }
 
-function Index({data = [{}], refetch}: compData) {
+function Index({data = [{}], refetch, loading}: compData) {
   const [deleteSelectedUser, deleteRes] = useMutation(DELETE_USER);
 
   const deleteUser =(id: number): void => {
@@ -44,6 +45,7 @@ function Index({data = [{}], refetch}: compData) {
             renderDelete(item.id)
           ]
       })} 
+      isFetch={loading}
       header={['No', 'Name', 'Username', 'Action']}
       align={['center, center, center, center']}
        />

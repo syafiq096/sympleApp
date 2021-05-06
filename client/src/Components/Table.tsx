@@ -50,7 +50,7 @@ function Tables(data: any) {
                   })}
                 </TableRow>
               </TableHead>
-              {data.header.length ? (
+              {data.data.length ? (
                 <TableBody>
                   {data?.data.map((item: any, key: any) => {
                     return (

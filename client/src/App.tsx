@@ -8,7 +8,7 @@ import UpdateUser from './View/UpdatePassword';
 import AppBar from './Components/Appbar';
 
 function App() {
-  const { data, refetch } = useQuery(GET_ALL_USERS);
+  const { data, refetch, loading } = useQuery(GET_ALL_USERS);
   const [createUser, createUserRes] = useMutation(CREATE_USER);
   const [userInfo, setUserInfo] = useState({
     name: "",
@@ -33,7 +33,7 @@ function App() {
         <input type="text" placeholder="User Name" onChange={e => setUserInfo({...userInfo, userName: e.target.value})} />
         <input type="text" placeholder="Password" onChange={e => setUserInfo({...userInfo, password: e.target.value})} />
         <button onClick={handleSubmit}>Create User</button>
-        <List data={data?.getAllUsers} refetch={refetch}/>
+        <List data={data?.getAllUsers} refetch={refetch} loading={loading}/>
         <UpdateUser />
       </div>
       </div>
