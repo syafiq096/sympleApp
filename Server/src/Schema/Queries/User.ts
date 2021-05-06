@@ -17,6 +17,8 @@ export const SEARCH_USERS = {
         name: {type: GraphQLString},
     },
     resolve(parent: any, args: any) {
-        return Users.find({name: Like(`%${args.name}%`)});
+        console.log(`args`, args)
+        if(Object.keys(args).length !== 0) return Users.find({name: Like(`%${args.name}%`)});
+        return Users.find();
     }
 }
