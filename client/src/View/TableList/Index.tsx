@@ -1,18 +1,28 @@
-import React, { useEffect } from 'react';
-import {GET_ALL_USERS} from '../../GraphQL/Queries'
-import {useQuery} from '@apollo/client';
+import React, { useEffect, useState } from "react";
+import { GET_ALL_USERS } from "../../GraphQL/Queries";
+import { DELETE_USER } from "../../GraphQL/Mutation";
+import { useQuery, useMutation } from "@apollo/client";
 
 function Index() {
-  const { data } = useQuery(GET_ALL_USERS);
+  const { data, refetch } = useQuery(GET_ALL_USERS);
+  const [deleteSelectedUser, deleteRes] = useMutation(DELETE_USER);
 
-  useEffect(() => {
-    if (data) console.log('data :>> ', data);
+  const deleteUser =(id: number): void => {
+    deleteSelectedUser({variables: {id: id}}).then(() => refetch())
+  }
 
-  }, [data]);
-
-  return <div>{data?.getAllUsers.map((item: any) => {
-      return <div key={item.id}>{item.name} / {item.username}</div>
-  })}</div>;
+  return (
+    <div>
+      {data?.getAllUsers.map((item: any) => {
+        return (
+          <div key={item.id}>
+            {item.name} / {item.username}
+            <button onClick={() => deleteUser(item.id)}>Delete User</button>
+          </div>
+        );
+      })}
+    </div>
+  );
 }
 
-export default Index
+export default Index;
