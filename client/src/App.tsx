@@ -33,7 +33,7 @@ function App() {
         <Box mt={3} />
         <Divider variant="middle" />
         <Box mt={3} />
-        <List data={data?.getAllUsers} refetch={refetch} loading={loading} setSearch={setSearch} search={search} />
+        <List data={data?.getAllUsers} refetch={refetch} getUser={getUser} loading={loading} setSearch={setSearch} search={search} />
         <Box mt={2} />
       </Container>
     </div>

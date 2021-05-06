@@ -35,7 +35,7 @@ function Index({refetch}: compData) {
           })
           .then(() => {
             refetch({variables: {name: ""}})
-            enqueueSnackbar("Successfully Delete User", { variant: "success" });
+            enqueueSnackbar("Successfully Add User", { variant: "success" });
               setUserInfo({
                   ...userInfo,
                   name: '',

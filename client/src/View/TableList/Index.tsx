@@ -29,13 +29,14 @@ interface compData {
   loading: any;
   setSearch: any;
   search: string;
+  getUser: any;
 }
 
 const useStyles = makeStyles((theme) => ({
   root: {},
 }));
 
-function Index({ data = [{}], refetch, loading, setSearch, search }: compData) {
+function Index({ data = [{}], refetch, loading, setSearch, search, getUser }: compData) {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
   const [deleteSelectedUser, deleteRes] = useMutation(DELETE_USER);
@@ -102,7 +103,7 @@ function Index({ data = [{}], refetch, loading, setSearch, search }: compData) {
             </Grid>
             <Grid item md={5} xs={12}>
               <Button
-                onClick={() => refetch({variables: {name: search}})}
+                onClick={() => getUser({variables: {name: search}})}
                 variant="contained"
                 color="primary"
                 size="large"
