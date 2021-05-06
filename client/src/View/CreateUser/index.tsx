@@ -32,7 +32,7 @@ function Index({refetch}: compData) {
             password: userInfo.password}
           })
           .then(() => {
-            refetch({variables: {name: ""}});
+            refetch({variables: {name: ""}})
               setUserInfo({
                   ...userInfo,
                   name: '',

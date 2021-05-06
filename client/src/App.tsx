@@ -10,7 +10,7 @@ import { Box, Container, Divider } from "@material-ui/core";
 
 function App() {
   const [search, setSearch] = useState("")
-  const [getUser, { data, loading }] = useLazyQuery(GET_ALL_USERS);
+  const [getUser, { data, loading, refetch }] = useLazyQuery(GET_ALL_USERS);
 
   console.log('search :>> ', search);
 
@@ -23,7 +23,7 @@ function App() {
       <AppBar />
       <Container maxWidth="xl">
         <Box mt={2} />
-        <UserForm refetch={getUser} />
+        <UserForm refetch={refetch} />
         {/* <div className="createUser">
         <input type="text" placeholder="Name" onChange={e => setUserInfo({...userInfo, name: e.target.value})} />
         <input type="text" placeholder="User Name" onChange={e => setUserInfo({...userInfo, userName: e.target.value})} />
@@ -34,7 +34,7 @@ function App() {
         <Divider variant="middle" />
         <Box mt={3} />
 
-        <List data={data?.getAllUsers} refetch={getUser} loading={loading} setSearch={setSearch} search={search} />
+        <List data={data?.getAllUsers} refetch={refetch} loading={loading} setSearch={setSearch} search={search} />
         <Box mt={2} />
         <UpdateUser />
       </Container>

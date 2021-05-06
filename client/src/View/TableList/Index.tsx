@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { DELETE_USER } from "../../GraphQL/Mutation";
 import { useMutation } from "@apollo/client";
 
 import TableList from "../../Components/Table";
+import Modal from "../../Components/UpdatePasswordModal";
 import {
   Box,
   Button,
@@ -39,10 +40,17 @@ function Index({ data = [{}], refetch, loading, setSearch, search }: compData) {
   const { enqueueSnackbar } = useSnackbar();
   const [deleteSelectedUser, deleteRes] = useMutation(DELETE_USER);
 
+  const [oenModal, setOpenModal] = useState(false)
+
+  const closeModal =()=> {
+    setOpenModal(false)
+  }
+
   const deleteUser = (id: number): void => {
     deleteSelectedUser({ variables: { id: id } }).then(() => {
-      refetch();
       enqueueSnackbar("Successfully Delete User", { variant: "success" });
+      setSearch("");
+      refetch({variables: {name: search}});
     });
   };
 
@@ -105,7 +113,8 @@ function Index({ data = [{}], refetch, loading, setSearch, search }: compData) {
             </Grid>
             <Grid item md={2} xs={4}>
               <Button
-                onClick={() => refetch({variables: {name: search}})}
+                //onClick={() => refetch({variables: {name: search}})}
+                onClick={()=> setOpenModal(true)}
                 variant="contained"
                 color="primary"
                 size="large"
@@ -132,6 +141,10 @@ function Index({ data = [{}], refetch, loading, setSearch, search }: compData) {
           />
         </CardContent>
       </Card>
+      <Modal
+      open={oenModal}
+      handleClose={closeModal}
+      refetch={refetch} />
     </div>
   );
 }
