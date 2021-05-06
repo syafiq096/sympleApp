@@ -40,10 +40,10 @@ function Tables(data: any) {
                   {data.header?.map((item: any, index: any) => {
                     const newIndex = index;
                     const headerAlign = data.align?.filter(
-                      (item: any, index: any) => index === newIndex
+                      (item: any, index1: any) => index1 === newIndex
                     );
                     return (
-                      <TableCell align={headerAlign ? headerAlign[0] : "center"}>
+                      <TableCell align={headerAlign ? headerAlign[0] : "center"} style={{fontWeight: 550}}>
                         {item}
                       </TableCell>
                     );
