@@ -3,7 +3,7 @@ import { DELETE_USER } from "../../GraphQL/Mutation";
 import { useMutation } from "@apollo/client";
 
 import TableList from '../../Components/Table'
-import { IconButton, SvgIcon, Tooltip } from "@material-ui/core";
+import { Card, CardContent, CardHeader, Divider, IconButton, makeStyles, SvgIcon, Tooltip } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu'
 
 interface compData {
@@ -12,7 +12,16 @@ interface compData {
     loading: any
 }
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+
+  },
+}));
+
+
 function Index({data = [{}], refetch, loading}: compData) {
+
+  const classes = useStyles();
   const [deleteSelectedUser, deleteRes] = useMutation(DELETE_USER);
 
   const deleteUser =(id: number): void => {
@@ -34,7 +43,12 @@ function Index({data = [{}], refetch, loading}: compData) {
   };
 
   return (
-    <div>
+    <div className={classes.root}>
+      <Card >
+        <CardHeader
+        title="User Table" />
+        <Divider />
+        <CardContent>
       <TableList 
       data={
         data.map((item: any , index: number) => {
@@ -47,8 +61,9 @@ function Index({data = [{}], refetch, loading}: compData) {
       })} 
       isFetch={loading}
       header={['No', 'Name', 'Username', 'Action']}
-      align={['center, center, center, center']}
        />
+       </CardContent>
+       </Card>
     </div>
   );
 }
