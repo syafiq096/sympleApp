@@ -1,5 +1,6 @@
 import React from 'react';
 import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
+import { SnackbarProvider } from 'notistack';
 import ReactDOM from 'react-dom';
 import App from './App';
 import "./index.css";
@@ -13,7 +14,9 @@ const client = new ApolloClient({
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
+      <SnackbarProvider maxSnack={3}>
       <App />
+      </SnackbarProvider>
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
