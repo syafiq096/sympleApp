@@ -133,11 +133,12 @@ function Index({ data = [{}], refetch, loading, setSearch, search }: compData) {
                 index + 1,
                 item.name,
                 item.username,
+                item.password,
                 renderDelete(item.id),
               ];
             })}
             isFetch={loading}
-            header={["No", "Name", "Username", "Action"]}
+            header={["No", "Name", "Username", "Password", "Action"]}
           />
         </CardContent>
       </Card>
