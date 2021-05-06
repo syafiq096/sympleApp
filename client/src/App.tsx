@@ -6,7 +6,8 @@ import List from "./View/TableList/Index";
 import UpdateUser from "./View/UpdatePassword";
 import AppBar from "./Components/Appbar";
 import UserForm from "./View/CreateUser";
-import { Box, Container, Divider } from "@material-ui/core";
+import UserCard from "./View/UserCard";
+import { Box, Container, Divider, Grid } from "@material-ui/core";
 
 function App() {
   const [search, setSearch] = useState("")
@@ -19,8 +20,15 @@ function App() {
   return (
     <div>
       <AppBar />
-      <Container maxWidth="xl">
-        <Box mt={2} />
+      <Container maxWidth="lg">
+      <Box mt={2} />
+      <Grid container>
+        <Grid item md={12}>
+        <UserCard />
+        </Grid>
+      </Grid>
+        
+        <Box mt={4} />
         <UserForm refetch={refetch} />
         <Box mt={3} />
         <Divider variant="middle" />

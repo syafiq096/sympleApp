@@ -78,7 +78,7 @@ function Index({ data = [{}], refetch, loading, setSearch, search }: compData) {
           container 
           spacing={3} 
           alignItems="center"
-          //justify="center"
+          justify="center"
           >
             <Grid item md={4} xs={12}>
               <TextField
@@ -100,7 +100,7 @@ function Index({ data = [{}], refetch, loading, setSearch, search }: compData) {
                 variant="outlined"
               />
             </Grid>
-            <Grid item md={6} xs={12}>
+            <Grid item md={5} xs={12}>
               <Button
                 onClick={() => refetch({variables: {name: search}})}
                 variant="contained"
@@ -111,7 +111,7 @@ function Index({ data = [{}], refetch, loading, setSearch, search }: compData) {
                 Search
               </Button>
             </Grid>
-            <Grid item md={2} xs={4}>
+            <Grid item md={3} xs={4} alignContent="flex-end">
               <Button
                 //onClick={() => refetch({variables: {name: search}})}
                 onClick={()=> setOpenModal(true)}
