@@ -4,6 +4,7 @@ import { useMutation } from "@apollo/client";
 
 import TableList from '../../Components/Table'
 import { Card, CardContent, CardHeader, Divider, IconButton, makeStyles, SvgIcon, Tooltip } from "@material-ui/core";
+import { VariantType, useSnackbar } from 'notistack';
 import MenuIcon from '@material-ui/icons/Menu'
 
 interface compData {
@@ -22,10 +23,15 @@ const useStyles = makeStyles((theme) => ({
 function Index({data = [{}], refetch, loading}: compData) {
 
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
   const [deleteSelectedUser, deleteRes] = useMutation(DELETE_USER);
 
   const deleteUser =(id: number): void => {
-    deleteSelectedUser({variables: {id: id}}).then(() => refetch())
+    deleteSelectedUser({variables: {id: id}})
+    .then(() => {
+      refetch();
+      enqueueSnackbar('Successfully Delete User', { variant: "success"});
+    })
   }
 
   const renderDelete = (id: number) => {
