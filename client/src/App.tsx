@@ -4,6 +4,7 @@ import {CREATE_USER} from './GraphQL/Mutation'
 import './App.css';
 
 import List from './View/TableList/Index';
+import UpdateUser from './View/UpdatePassword';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
         <input type="text" placeholder="Password" onChange={e => setUserInfo({...userInfo, password: e.target.value})} />
         <button onClick={handleSubmit}>Create User</button>
         <List />
+        <UpdateUser />
       </div>
   );
 }
