@@ -4,8 +4,8 @@ import { useMutation } from "@apollo/client";
 
 import TableList from '../../Components/Table'
 import { Card, CardContent, CardHeader, Divider, IconButton, makeStyles, SvgIcon, Tooltip } from "@material-ui/core";
-import { VariantType, useSnackbar } from 'notistack';
-import MenuIcon from '@material-ui/icons/Menu'
+import {  useSnackbar } from 'notistack';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 interface compData {
     data?: any;
@@ -37,10 +37,10 @@ function Index({data = [{}], refetch, loading}: compData) {
   const renderDelete = (id: number) => {
     return (
       <div>
-          <Tooltip title="Invoice" aria-label="Update">
+          <Tooltip title="Delete User" aria-label="Update">
             <IconButton onClick={() => deleteUser(id)}>
               <SvgIcon fontSize="small">
-                <MenuIcon />
+                <CancelIcon />
               </SvgIcon>
             </IconButton>
           </Tooltip>
