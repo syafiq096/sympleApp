@@ -11,12 +11,14 @@ import {
   TextField,
 } from "@material-ui/core";
 import React, { useState } from "react";
+import { useSnackbar } from "notistack";
 
 interface compData {
     refetch: any
 }
 
 function Index({refetch}: compData) {
+    const { enqueueSnackbar } = useSnackbar();
     const [createUser, createUserRes] = useMutation(CREATE_USER);
     const [userInfo, setUserInfo] = useState({
       name: "",
@@ -33,6 +35,7 @@ function Index({refetch}: compData) {
           })
           .then(() => {
             refetch({variables: {name: ""}})
+            enqueueSnackbar("Successfully Delete User", { variant: "success" });
               setUserInfo({
                   ...userInfo,
                   name: '',
