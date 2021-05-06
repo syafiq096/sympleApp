@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { GET_ALL_USERS } from "../../GraphQL/Queries";
+import React from "react";
 import { DELETE_USER } from "../../GraphQL/Mutation";
-import { useQuery, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 
-function Index() {
-  const { data, refetch } = useQuery(GET_ALL_USERS);
+interface compData {
+    data?: any;
+    refetch: () => {}
+}
+
+function Index({data = [{}], refetch}: compData) {
   const [deleteSelectedUser, deleteRes] = useMutation(DELETE_USER);
 
   const deleteUser =(id: number): void => {
@@ -13,7 +16,7 @@ function Index() {
 
   return (
     <div>
-      {data?.getAllUsers.map((item: any) => {
+      {data.map((item: any) => {
         return (
           <div key={item.id}>
             {item.name} / {item.username}
