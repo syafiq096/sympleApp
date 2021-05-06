@@ -92,7 +92,7 @@ function Index({ data = [{}], refetch, loading, setSearch, search }: compData) {
                 variant="outlined"
               />
             </Grid>
-            <Grid item md={1} xs={12}>
+            <Grid item md={6} xs={12}>
               <Button
                 onClick={() => refetch({variables: {name: search}})}
                 variant="contained"
@@ -101,6 +101,17 @@ function Index({ data = [{}], refetch, loading, setSearch, search }: compData) {
                 // disabled={isSubmitting || !dirty}>
               >
                 Search
+              </Button>
+            </Grid>
+            <Grid item md={2} xs={4}>
+              <Button
+                onClick={() => refetch({variables: {name: search}})}
+                variant="contained"
+                color="primary"
+                size="large"
+                // disabled={isSubmitting || !dirty}>
+              >
+                Update Password
               </Button>
             </Grid>
           </Grid>
