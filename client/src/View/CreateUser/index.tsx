@@ -13,7 +13,7 @@ import {
 import React, { useState } from "react";
 
 interface compData {
-    refetch: () => {}
+    refetch: any
 }
 
 function Index({refetch}: compData) {
@@ -32,7 +32,7 @@ function Index({refetch}: compData) {
             password: userInfo.password}
           })
           .then(() => {
-            refetch();
+            refetch({variables: {name: ""}});
               setUserInfo({
                   ...userInfo,
                   name: '',
